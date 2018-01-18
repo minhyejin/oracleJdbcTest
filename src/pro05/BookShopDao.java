@@ -135,11 +135,26 @@ public class BookShopDao {
 			conn = DriverManager.getConnection(url, "webdb", "webdb");
 		    
 			// 3. SQL문 준비 / 바인딩 / 실행
-			String query = "";
-			
+			String query = "update bookshop set state_code = ? where id = ?";
+
 			pstmt = conn.prepareStatement(query);
-		     pstmt.executeUpdate();
-		    		// 4.결과처리
+			BookVo selectedBook =selectBook(id);
+			
+			int state = 0;
+			if (selectedBook.getStateCode() == 1) {
+				state = 0;
+			} else if (selectedBook.getStateCode() == 0) {
+				state = 1;
+			}
+
+			pstmt.setInt(1, state);
+			pstmt.setInt(2, id);
+
+			int count = pstmt.executeUpdate();
+			
+			System.out.println(selectedBook.getTitle() + "이(가) 대여 됐습니다.");
+
+		    		
 		    
 
 		} catch (ClassNotFoundException e) {
