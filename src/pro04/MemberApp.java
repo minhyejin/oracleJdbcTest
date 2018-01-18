@@ -64,10 +64,10 @@ public class MemberApp {
 		System.out.println( "***** 현재  멤버 리스트 *****" );
 
 		for(MemberVo vo : dao.getListAll()) {
-			System.out.println("=====================================================================================================");
+			
 			System.out.println(vo.getId()  + " | " + vo.getName() + " | " + vo.getEmail()  + " | " +  vo.getPassword()  + " | " + vo.getGender());
 		}
-		
+		System.out.println();
 		
 	}
 	
