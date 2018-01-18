@@ -179,64 +179,69 @@ public class BookShopDao {
 		}
 
 	}
-
-	public List<BookVo> getListAll() {
-		
+	
+	static public List<BookVo> getListAll() {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
-		 List<BookVo> BookList = new ArrayList<BookVo>();
+		List<BookVo> voList = new ArrayList<BookVo>();
+
 		try {
-		    // 1. JDBC 드라이버 (Oracle) 로딩
+			// 1. JDBC 드라이버 (Oracle) 로딩
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-		    // 2. Connection 얻어오기
+
+			// 2. Connection 얻어오기
 			String url = "jdbc:oracle:thin:@localhost:1521:xe";
 			conn = DriverManager.getConnection(url, "webdb", "webdb");
-		    // 3. SQL문 준비 / 바인딩 / 실행
-		    String query = "";
-		    pstmt = conn.prepareStatement(query);
-		    rs = pstmt.executeQuery();
-   
-		    // 4.결과처리
-		    while(rs.next()) {
 
-		    int id = rs.getInt("id");
-		    String title= rs.getString("title");
-		    String pubs = rs.getString("pubs");
-		    String pubDate = rs.getString("pub_date");
-		    String authorName = rs.getString("author_name");
-		    int stateCode = rs.getInt("state_code");
-		    
-		    
-		    BookList.add(new BookVo(id,title,pubs,pubDate,authorName,stateCode));
+			// 3. SQL문 준비 / 바인딩 / 실행
+			String query = " SELECT id, title, pubs, pub_date, author_name, state_code " + " FROM bookshop ";
+			pstmt = conn.prepareStatement(query);
 
-		   } 
-		    
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				BookVo book = new BookVo();
+				int id = rs.getInt("id");
+				String title = rs.getString("title");
+				String pubs = rs.getString("pubs");
+				String pubDate = rs.getString("pub_date");
+				String authorName = rs.getString("author_name");
+				int stateCode = rs.getInt("state_code");
+				book.setId(id);
+				book.setTitle(title);
+				book.setPubs(pubs);
+				book.setPubDate(pubDate);
+				book.setAuthorName(authorName);
+				book.setStateCode(stateCode);
+				
+				voList.add(book);
+			}
+
 		} catch (ClassNotFoundException e) {
-		    System.out.println("error: 드라이버 로딩 실패 - " + e);
+			System.out.println("error: 드라이버 로딩 실패 - " + e);
 		} catch (SQLException e) {
-		    System.out.println("error:" + e);
+			System.out.println("error:" + e);
 		} finally {
-		   
-		    // 5. 자원정리
-		    try {
-		        if (rs != null) {
-		            rs.close();
-		        }                
-		        if (pstmt != null) {
-		            pstmt.close();
-		        }
-		        if (conn != null) {
-		            conn.close();
-		        }
-		    } catch (SQLException e) {
-		        System.out.println("error:" + e);
-		    }
+
+			// 5. 자원정리
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				System.out.println("error:" + e);
+			}
 
 		}
-
-		return BookList;}
-
 	
+		return voList;
+	}
+
 }
