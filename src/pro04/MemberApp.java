@@ -10,60 +10,64 @@ public class MemberApp {
 	public static void main(String[] args) {
 		
 		
-		// ±è»ó¸í Ãß°¡
+		//ê¹€ìƒëª… ì¶”ê°€ 
 		MemberVo vo = new MemberVo();
 		vo.setEmail( "kim@bit.ac.kr" );
-		vo.setName( "±èºñÆ®" );
-		vo.setGender( "³²" );
+		vo.setName( "ê¹€ë¹„íŠ¸" );
+		vo.setGender( "ë‚¨" );
 		vo.setPassword( "12345" );
 		
 		dao.insertMember( vo );
 		
-		// ÇöÀç ¸â¹ö ¸®½ºÆ® Ãâ·Â
+		// í˜„ì¬ ë©¤ë²„ ë¦¬ìŠ¤íŠ¸ ì¶œë ¥
 		printAllMemebrList();
 
 		
 		
 		
-		// ÀÌ»ó¸í Ãß°¡
+		// ì´ìƒëª… ì¶”ê°€
 		vo.setEmail( "lee@bit.ac.kr" );
-		vo.setName( "ÀÌºñÆ®" );
-		vo.setGender( "¿©" );
+		vo.setName( "ì´ë¹„íŠ¸" );
+		vo.setGender( "ì—¬" );
 		vo.setPassword( "12345" );
 
 		dao.insertMember( vo );
 		
-		// ÇöÀç ¸â¹ö ¸®½ºÆ® Ãâ·Â
+		// í˜„ì¬ ë©¤ë²„ ë¦¬ìŠ¤íŠ¸ ì¶œë ¥
 		printAllMemebrList();
 		
 		
 		
 		
-		// ÀÌ»ó¸í ºñ¹Ğ¹øÈ£ º¯°æ(ÀÌ¸ŞÀÏ ÁÖ¼Ò Ã£¾Æ¼­ ºñ¹Ğ¹øÈ£¸¸ º¯°æµÇ¾î¾ßÇÔ)
+		// ì´ìƒëª… ë¹„ë°€ë²ˆí˜¸ ë³€ê²½(ì´ë©”ì¼ ì£¼ì†Œ ì°¾ì•„ì„œ ë¹„ë°€ë²ˆí˜¸ë§Œ ë³€ê²½ë˜ì–´ì•¼í•¨)
 		vo.setEmail( "lee@bit.ac.kr" );
 		vo.setName( "" );
 		vo.setGender( "" );
 		vo.setPassword( "54321" );
 
 		dao.updatePassword( vo );
-		// ÇöÀç ¸â¹ö ¸®½ºÆ® Ãâ·Â
+		//  í˜„ì¬ ë©¤ë²„ ë¦¬ìŠ¤íŠ¸ ì¶œë ¥
 		printAllMemebrList();
 		
 		
 		
 		
-		// ±è»ó¸í »èÁ¦
+		// ê¹€ìƒëª… ì‚­ì œ
 		dao.deleteMember( "kim@bit.ac.kr" );
-		// ÇöÀç ¸â¹ö ¸®½ºÆ® Ãâ·Â
+		//  í˜„ì¬ ë©¤ë²„ ë¦¬ìŠ¤íŠ¸ ì¶œë ¥
 		printAllMemebrList();
 		
 		
 	}
 	
 	public static void printAllMemebrList() {
-		System.out.println( "***** ÇöÀç  ¸â¹ö ¸®½ºÆ® *****" );
+		System.out.println( "***** í˜„ì¬  ë©¤ë²„ ë¦¬ìŠ¤íŠ¸ *****" );
 
-		//Ãâ·ÂÄÚµåÀÛ¼º
+		for(MemberVo vo : dao.getListAll()) {
+			System.out.println("=====================================================================================================");
+			System.out.println(vo.getId()  + " | " + vo.getName() + " | " + vo.getEmail()  + " | " +  vo.getPassword()  + " | " + vo.getGender());
+		}
+		
 		
 	}
 	
