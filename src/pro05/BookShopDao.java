@@ -138,9 +138,6 @@ public class BookShopDao {
 			String query = "";
 			
 			pstmt = conn.prepareStatement(query);
-			
-			
-		    
 		     pstmt.executeUpdate();
 		    		// 4.결과처리
 		    
@@ -166,11 +163,8 @@ public class BookShopDao {
 
 		}
 
-
 	}
-	
 
-	
 	public List<BookVo> getListAll() {
 		
 		Connection conn = null;
@@ -188,9 +182,7 @@ public class BookShopDao {
 		    String query = "";
 		    pstmt = conn.prepareStatement(query);
 		    rs = pstmt.executeQuery();
-		    
-		   
-		    
+   
 		    // 4.결과처리
 		    while(rs.next()) {
 
@@ -203,8 +195,7 @@ public class BookShopDao {
 		    
 		    
 		    BookList.add(new BookVo(id,title,pubs,pubDate,authorName,stateCode));
-		    
-    
+
 		   } 
 		    
 		} catch (ClassNotFoundException e) {
