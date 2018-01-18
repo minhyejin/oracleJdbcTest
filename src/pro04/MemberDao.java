@@ -31,7 +31,8 @@ public class MemberDao {
 		    pstmt.setString(4,vo.getGender());
 		
 		    // 4.결과처리
-			
+		    pstmt.executeUpdate();
+		    
 		} catch (ClassNotFoundException e) {
 		    System.out.println("error: 드라이버 로딩 실패 - " + e);
 		} catch (SQLException e) {
@@ -80,7 +81,7 @@ public class MemberDao {
 					pstmt.setString(2,vo.getEmail());
 					
 				    
-				    int count = pstmt.executeUpdate();
+				     pstmt.executeUpdate();
 				    		// 4.결과처리
 				    
 
@@ -130,7 +131,7 @@ public class MemberDao {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1,email);
 			
-			int count = pstmt.executeUpdate();      //insert, update, delete
+			pstmt.executeUpdate();      //insert, update, delete
 			
 
 			// 4.결과처리
